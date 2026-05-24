@@ -36,7 +36,7 @@ FinanceEngine deliberately uses **both UIKit and SwiftUI** in the same codebase 
 | Concurrency | Swift Concurrency (`async/await`, `Task`) |
 | Reactive | Combine / `@Observable` |
 | Testing | XCTest (Unit + UI) |
-| Minimum iOS | 16.0 |
+| Minimum iOS | 17.6 |
 
 ---
 
