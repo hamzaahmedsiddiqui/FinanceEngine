@@ -7,7 +7,12 @@
 
 import Foundation
 
-enum Status: String {
-    case success = "Success"
-    case failure = "Failure"
+enum NetworkError: Error {
+    case invalidURL
+    case invalidResponse
+    case statusCode(Int)
+    case decoding(Error)
+    case noInternet
+    case timeout
+    case unknown(Error)
 }
