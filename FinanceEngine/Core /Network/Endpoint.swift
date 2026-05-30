@@ -15,4 +15,16 @@ struct Endpoint<Response: Decodable> {
     let requiresAuth: Bool
 }
 
+// Account End point
+extension Endpoint where Response == AccountDTO{
+    static func account() -> Self {
+        Endpoint(
+            path: "accounts",
+            method: .get,
+            queryItems: [],
+            body: nil,
+            requiresAuth: true
+        )
+    }
+}
 
