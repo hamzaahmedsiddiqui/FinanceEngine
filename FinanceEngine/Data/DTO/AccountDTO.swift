@@ -7,33 +7,31 @@
 
 import Foundation
 
-struct AccountDTO: Codable {
+struct AccountDTO: Decodable {
+    
     let id: String
     let userName: String
     let email: String
     let mobile: String
-    let balance: Double
-    let createdAt: String
-    let updatedAt: String
-    let deletedAt: String?
+    let balance: Decimal
+    let createdAt: Date
+    let updatedAt: Date
+    let deletedAt: Date?
 }
 
 extension AccountDTO {
-    
+    private static let formatter = ISO8601DateFormatter()
+
     func toDomain() -> Account {
-        
-        let formatter =
-        ISO8601DateFormatter()
-        
+                
         return Account(
             id: id,
             userName: userName,
             email: email,
             mobile: mobile,
-            balance: Decimal(balance),
-            createdAt:formatter.date(from: createdAt) ?? .now,
-            updatedAt: formatter.date(from: updatedAt) ?? .now,
-            deletedAt: deletedAt.flatMap { formatter.date(from: $0) }
+            balance: balance,
+            createdAt:  createdAt,
+            updatedAt:  updatedAt
         )
     }
 }

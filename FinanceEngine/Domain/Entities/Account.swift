@@ -15,5 +15,4 @@ struct Account {
     let balance: Decimal
     let createdAt: Date
     let updatedAt: Date
-    let deletedAt: Date?
 }

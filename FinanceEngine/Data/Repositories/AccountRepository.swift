@@ -11,13 +11,19 @@ protocol AccountRepositoryProtocol {
 }
 
 final class AccountRepository: AccountRepositoryProtocol {
-    private let httpClient: HTTPClientProtocol
-    init (httpClient:HTTPClientProtocol){
-        self.httpClient = httpClient
+    private let apiClient: APIClientProtocol
+    
+    init (apiClient:APIClientProtocol){
+        self.apiClient = apiClient
     }
     
     func fetchAccount() async throws -> Account {
-       
-                                                
+        let dto = try await apiClient.getAccount()
+        
+        guard dto.deletedAt == nil else {
+            throw RepositoriesError.accountDeleted
+        }
+        
+        return dto.toDomain()
     }
 }
