@@ -11,23 +11,29 @@ import Combine
 @MainActor
 final class DashboardViewModel: ObservableObject {
     @Published private(set) var account: Account?
+    @Published private(set) var transactions: [Transaction] = []
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var errorMessage:String?
     
-    private let fetchAccountUseCase: FetchAccountUseCaseProtocol
+    private let getAccountUseCase: GetAccountUseCaseProtocol
+    private let getTransactionsUseCase: GetTransactionsUseCaseProtocol
     
-    init(fetchAccountUseCase: FetchAccountUseCaseProtocol) {
-        self.fetchAccountUseCase = fetchAccountUseCase
+    init(getAccountUseCase: GetAccountUseCaseProtocol, getTransactionsUseCase: GetTransactionsUseCaseProtocol) {
+        self.getAccountUseCase = getAccountUseCase
+        self.getTransactionsUseCase = getTransactionsUseCase
     }
     
-    func loadAccount() async {
+    func loadDashboard() async {
         isLoading = true
         defer { isLoading = false }
         
         do {
             
-            let account = try await fetchAccountUseCase.execute()
-            self.account = account
+            async let account = getAccountUseCase.execute()
+            async let transcations = getTransactionsUseCase.execute()
+            
+            self.account =  try await account
+            self.transactions =  try await transcations
             
         } catch {
             
@@ -35,4 +41,6 @@ final class DashboardViewModel: ObservableObject {
             
         }
     }
+    
+    
 }

@@ -6,9 +6,6 @@
 //
 
 import Foundation
-protocol AccountRepositoryProtocol {
-    func fetchAccount() async throws -> Account
-}
 
 final class AccountRepository: AccountRepositoryProtocol {
     private let apiClient: APIClientProtocol
@@ -17,7 +14,7 @@ final class AccountRepository: AccountRepositoryProtocol {
         self.apiClient = apiClient
     }
     
-    func fetchAccount() async throws -> Account {
+    func getAccount() async throws -> Account {
         let dto = try await apiClient.getAccount()
         
         guard dto.deletedAt == nil else {

@@ -6,11 +6,11 @@
 //
 
 import Foundation
-protocol FetchAccountUseCaseProtocol{
+protocol GetAccountUseCaseProtocol{
     func execute() async throws -> Account
 }
 
-final class FetchAccountUseCase: FetchAccountUseCaseProtocol {
+final class GetAccountUseCase: GetAccountUseCaseProtocol {
     
     private let repository: AccountRepositoryProtocol
     
@@ -19,6 +19,6 @@ final class FetchAccountUseCase: FetchAccountUseCaseProtocol {
     }
     
     func execute() async throws -> Account {
-        try await repository.fetchAccount()
+        try await repository.getAccount()
     }
 }
