@@ -14,4 +14,12 @@ struct Transaction {
     let currency: String
     let title: String
     let createdAt: Date
+    let type: TransactionType
+}
+
+
+enum TransactionType: String, Decodable {
+    case credit
+    case debit
+    case unknown
 }

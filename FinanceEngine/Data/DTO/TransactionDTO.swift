@@ -7,12 +7,13 @@
 
 import Foundation
 
-struct TransactionDTO: Codable {
+struct TransactionDTO: Decodable {
     let id: String
     let amount: Double
     let currency: String
     let title: String
-    let createdAt: String
+    let createdAt: Date
+    let type: String
 }
 
 extension TransactionDTO {
@@ -23,7 +24,8 @@ extension TransactionDTO {
             amount: Decimal(amount),
             currency: currency,
             title: title,
-            createdAt: ISO8601DateFormatter().date(from: createdAt) ?? .now
+            createdAt: createdAt,
+            type: TransactionType(rawValue: type) ?? .unknown
         )
     }
 }
