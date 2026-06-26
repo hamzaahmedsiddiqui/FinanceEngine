@@ -14,13 +14,26 @@ enum KeychainError: Error {
     case dataConversionFailed
 }
 
+enum KeychainKey: String {
+    case authToken = "auth_token"
+}
 
-final class KeychainManager {
+
+protocol KeychainManagerProtocol {
+    func save<T: Encodable>(_ object: T, for key: KeychainKey) throws
+    func read<T: Decodable>(_ type: T.Type, for key: KeychainKey) throws -> T
+    func delete(for key: KeychainKey) throws
+}
+
+final class KeychainManager: KeychainManagerProtocol {
     
-    func save(_ value: String,for key: String) throws  {
-        guard let data = value.data(using: .utf8) else {
+    func save<T: Encodable>(_ object: T,for key: KeychainKey) throws  {
+        
+        let jsonData = try JSONEncoder().encode(object)
+        guard let data = String(data: jsonData, encoding: .utf8) else {
             throw KeychainError.dataConversionFailed
         }
+        
         
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -38,7 +51,7 @@ final class KeychainManager {
         }
     }
     
-    func delete(for key: String) throws {
+    func delete(for key: KeychainKey) throws {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key
@@ -51,7 +64,17 @@ final class KeychainManager {
         }
     }
     
-    func read(for key: String) throws -> String {
+    func read<T: Decodable>(_ type: T.Type, for key: KeychainKey) throws -> T {
+        
+        let value = try readFromKeychain(for: key)
+        
+        guard let data = value.data(using: .utf8) else {
+            throw KeychainError.dataConversionFailed
+        }
+        return try JSONDecoder().decode(type, from: data)
+    }
+    
+    private func readFromKeychain(for key: KeychainKey) throws -> String {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key,
@@ -71,5 +94,4 @@ final class KeychainManager {
         
         return value
     }
-    
 }

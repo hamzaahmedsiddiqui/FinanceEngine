@@ -14,12 +14,12 @@ protocol RequestBuilderProtocol {
 final class RequestBuilder: RequestBuilderProtocol {
     private let baseURL: String
     
-    init(baseURL: String) {
+    init(baseURL: String = "https://api.example.com") {
         self.baseURL = baseURL
     }
     
     func build<Response>(from endpoint: Endpoint<Response>) throws -> URLRequest {
-        guard var components = URLComponents(string: baseURL + endpoint.path) else {
+        guard var components = URLComponents(string: baseURL + endpoint.path.rawValue) else {
             throw NetworkError.invalidURL
         }
         
