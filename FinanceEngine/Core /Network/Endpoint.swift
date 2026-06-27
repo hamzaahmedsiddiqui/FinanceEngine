@@ -21,7 +21,7 @@ struct Endpoint<Response: Decodable> {
     let queryItems: [URLQueryItem]
     let body: AnyEncodable?
     let requiresAuth: Bool
-    
+        
     init(
         path: EndpointPath,
         method: HTTPMethod,

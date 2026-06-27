@@ -1,13 +1,9 @@
 import Foundation
 import SwiftUI
 
-struct LoginView: View {
+struct LoginView<viewModel: LoginViewModelProtocol>: View {
     
-    @StateObject var vm: LoginViewModel
-    
-    init(viewModel: LoginViewModel) {
-        _vm = StateObject(wrappedValue: viewModel)
-    }
+    @StateObject var vm: viewModel
     
     var body: some View {
         NavigationStack {
@@ -107,9 +103,6 @@ struct MyModifier: ViewModifier {
 }
 
 #Preview {
-    LoginView(
-        viewModel: LoginViewModel(
-            loginUseCase: MockLoginUseCase()
-        )
-    )
+    LoginView<LoginViewModel>(LoginViewModel(loginUseCase: MockLoginUseCase()))
+
 }

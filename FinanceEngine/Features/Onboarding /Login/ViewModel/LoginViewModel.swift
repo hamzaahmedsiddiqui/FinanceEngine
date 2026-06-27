@@ -8,8 +8,23 @@ import Combine
 import Foundation
 import SwiftUI
 
+protocol LoginViewModelProtocol: ObservableObject {
+    // properties View reads and writes
+    var email: String { get set }
+    var password: String { get set }
+    
+    // properties View reads only
+    var isLoading: Bool { get }
+    var errorMessage: String? { get }
+    var isLoggedIn: Bool { get }
+    
+    // methods View calls
+    func login() async
+}
+
+
 @MainActor
-final class LoginViewModel: ObservableObject {
+final class LoginViewModel: LoginViewModelProtocol {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published private(set) var isLoading: Bool = false
