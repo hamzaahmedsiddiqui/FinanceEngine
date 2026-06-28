@@ -20,7 +20,7 @@ extension TransactionDTO {
     
     func toDomain() -> Transaction {
         Transaction(
-            id: id,
+            id: UUID(uuidString: id) ?? UUID(),
             amount: Decimal(amount),
             currency: currency,
             title: title,

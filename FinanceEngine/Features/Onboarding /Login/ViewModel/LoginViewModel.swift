@@ -1,9 +1,4 @@
-//
-//  LoginViewModel.swift
-//  FinanceEngine
-//
-//  Created by hamza Ahmed on 2026-06-25.
-//
+
 import Combine
 import Foundation
 import SwiftUI
@@ -33,9 +28,11 @@ final class LoginViewModel: LoginViewModelProtocol {
     
     
     private let loginUseCase: LoginUseCaseProtocol
+    private let coordinator: AppCoordinatorProtocol
     
-    init( loginUseCase: LoginUseCaseProtocol) {
+    init( loginUseCase: LoginUseCaseProtocol, coordinator: AppCoordinatorProtocol) {
         self.loginUseCase = loginUseCase
+        self.coordinator = coordinator
     }
     
     
@@ -49,6 +46,7 @@ final class LoginViewModel: LoginViewModelProtocol {
         do {
             let _ = try await loginUseCase.login(email: self.email, password: self.password)
             isLoggedIn = true
+            coordinator.loginSucceeded()
         } catch {
             errorMessage = error.localizedDescription
         }

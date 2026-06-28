@@ -5,6 +5,10 @@ struct LoginView<viewModel: LoginViewModelProtocol>: View {
     
     @StateObject var vm: viewModel
     
+    init(viewModel: viewModel) {
+        _vm = StateObject(wrappedValue: viewModel)
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -103,6 +107,9 @@ struct MyModifier: ViewModifier {
 }
 
 #Preview {
-    LoginView<LoginViewModel>(LoginViewModel(loginUseCase: MockLoginUseCase()))
-
+    LoginView(
+        viewModel: LoginViewModel(
+            loginUseCase: MockLoginUseCase(), coordinator: AppCoordinator()
+        )
+    )
 }

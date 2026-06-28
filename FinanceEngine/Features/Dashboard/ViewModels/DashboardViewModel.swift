@@ -8,8 +8,17 @@
 import Foundation
 import Combine
 
+protocol DashboardViewModelProtocol: ObservableObject{
+    var account: Account? {get}
+    var transactions: [Transaction] {get}
+    var isLoading: Bool {get}
+    var errorMessage: String? {get}
+    
+    func loadDashboard() async
+}
+
 @MainActor
-final class DashboardViewModel: ObservableObject {
+final class DashboardViewModel: DashboardViewModelProtocol {
     @Published private(set) var account: Account?
     @Published private(set) var transactions: [Transaction] = []
     @Published private(set) var isLoading: Bool = false
