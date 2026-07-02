@@ -13,18 +13,15 @@ struct LoginView<viewModel: LoginViewModelProtocol>: View {
         NavigationStack {
             VStack {
                 Spacer()
-                title
-                logo
-                Spacer()
-                emailTextField
-                passwordTextField
-                
+                titleView
+                logoView
+                emailTextFieldView
+                passwordTextFieldView
                 errorMessage
-                
                 if vm.isLoading {
                     ProgressView()
                 } else {
-                    loginButton
+                    loginButtonView
                 }
                 Spacer()
             }.padding()
@@ -34,7 +31,7 @@ struct LoginView<viewModel: LoginViewModelProtocol>: View {
 
 // Computed properties
 extension LoginView {
-    var title: some View {
+    var titleView: some View {
         Text("Welcome to Finance Engine")
             .font(.title)
             .bold()
@@ -50,7 +47,7 @@ extension LoginView {
         }
     }
     
-    var logo: some View {
+    var logoView: some View {
         Image("logo")
             .resizable()
             .scaledToFit()
@@ -58,7 +55,7 @@ extension LoginView {
             .clipShape(RoundedRectangle(cornerRadius: 20))
     }
     
-    var loginButton: some View {
+    var loginButtonView: some View {
         Button {
             Task {
                 await vm.login()
@@ -74,13 +71,13 @@ extension LoginView {
         }
     }
     
-    var emailTextField: some View {
+    var emailTextFieldView: some View {
         TextField("Email", text: $vm.email)
             .keyboardType(.emailAddress)
             .inputFieldStyle()
     }
     
-    var passwordTextField: some View {
+    var passwordTextFieldView: some View {
         SecureField("Password", text: $vm.password)
             .inputFieldStyle()
             .padding(.bottom)
