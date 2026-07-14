@@ -15,8 +15,6 @@ protocol AppCoordinatorProtocol: AnyObject {
     func logout()
 }
 
-
-
 final class AppCoordinator: ObservableObject, AppCoordinatorProtocol{
     @Published var isLoggedIn: Bool = false
     

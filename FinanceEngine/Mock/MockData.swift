@@ -9,7 +9,7 @@ import Foundation
 
 enum MockData {
     
-    static let mockTransactions: [Transaction] = [
+    static let Transactions: [Transaction] = [
         Transaction(id: UUID(), amount: 250.00, currency: "USD", title: "Netflix", createdAt: Date(), type: .debit),
         Transaction(id: UUID(), amount: 1500.00, currency: "USD", title: "Salary", createdAt: Date(), type: .credit),
         Transaction(id: UUID(), amount: 45.00, currency: "USD", title: "Uber", createdAt: Date(), type: .debit),
@@ -17,7 +17,7 @@ enum MockData {
         Transaction(id: UUID(), amount: 120.00, currency: "USD", title: "Groceries", createdAt: Date(), type: .debit)
     ]
     
-    static let account = Account(
+    static let account: Account = Account(
             id: "1",
             userName: "Hamza",
             email: "hamza@test.com",
@@ -26,4 +26,11 @@ enum MockData {
             createdAt: Date(),
             updatedAt: Date()
         )
+    
+    static let authToken: AuthToken =   AuthToken(
+        accessToken: "testAccessToken",
+        refreshToken: "testRefreshToken",
+        userId: "1",
+        expiresIn: 3600
+    )
 }

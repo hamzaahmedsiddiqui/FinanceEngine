@@ -101,7 +101,7 @@ extension DashboardView {
     private var transactionList: some View {
         List {
             Section {
-                ForEach(MockData.mockTransactions) { transaction in
+                ForEach(MockData.Transactions) { transaction in
                     transactionRow(transaction)
                 }
             } header: {
@@ -125,8 +125,8 @@ extension DashboardView {
     private var dashboardTransactionCard: some View{
         HStack(spacing: 20){
             
-            transactionCard(heading: "Recent transaction", trasaction: MockData.mockTransactions[0])
-            transactionCard(heading: "previous transaction", trasaction: MockData.mockTransactions[1])
+            transactionCard(heading: "Recent transaction", trasaction: MockData.Transactions[0])
+            transactionCard(heading: "previous transaction", trasaction: MockData.Transactions[1])
         }
         .frame(maxWidth: .infinity, maxHeight: 60)
     }

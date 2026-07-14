@@ -20,11 +20,12 @@ final class AppCompositionRoot {
     }()
     
     static func makeLoginViewModel(coordinator: AppCoordinator) -> LoginViewModel {
-        let authRepo = AuthRepository(
-            apiClient: Self.apiClient,
-            keychainManager: keychain
-        )
-        let loginUseCase = LoginUseCase(authRepository: authRepo)
+//        let authRepo = AuthRepository(
+//            apiClient: Self.apiClient,
+//            keychainManager: keychain
+//        )
+//        let loginUseCase = LoginUseCase(authRepository: authRepo)
+        let loginUseCase = MockLoginUseCase()
         return LoginViewModel(
             loginUseCase: loginUseCase,
             coordinator: coordinator
