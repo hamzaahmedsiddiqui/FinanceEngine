@@ -1,10 +1,3 @@
-//
-//  AppCoordinator.swift
-//  FinanceEngine
-//
-//  Created by hamza Ahmed on 2026-06-28.
-//
-
 import Combine
 
 
@@ -13,10 +6,13 @@ protocol AppCoordinatorProtocol: AnyObject {
     
     func loginSucceeded()
     func logout()
+    func showRegister()
 }
 
 final class AppCoordinator: ObservableObject, AppCoordinatorProtocol{
     @Published var isLoggedIn: Bool = false
+    @Published var isShowingRegister: Bool = false
+
     
     func loginSucceeded() {
         isLoggedIn = true
@@ -24,5 +20,9 @@ final class AppCoordinator: ObservableObject, AppCoordinatorProtocol{
     
     func logout() {
         isLoggedIn = false
+    }
+    
+    func showRegister() {
+        isShowingRegister = true
     }
 }

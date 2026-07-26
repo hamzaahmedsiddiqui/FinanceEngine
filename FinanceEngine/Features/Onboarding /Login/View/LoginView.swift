@@ -1,11 +1,11 @@
 import Foundation
 import SwiftUI
 
-struct LoginView<ViewModel: LoginViewModelProtocol>: View {
+struct LoginView<LoginViewModel: LoginViewModelProtocol>: View {
     
-    @StateObject var vm: ViewModel
+    @StateObject var vm: LoginViewModel
     
-    init(viewModel: ViewModel) {
+    init(viewModel: LoginViewModel) {
         _vm = StateObject(wrappedValue: viewModel)
     }
     
@@ -119,11 +119,11 @@ extension LoginView {
 
 extension View {
     func inputFieldStyle() -> some View {
-        self.modifier(MyModifier())
+        self.modifier(TextFieldModifier())
     }
 }
 
-struct MyModifier: ViewModifier {
+struct TextFieldModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .textInputAutocapitalization(.never)

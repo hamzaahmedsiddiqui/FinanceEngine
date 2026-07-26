@@ -1,9 +1,3 @@
-//
-//  FinanceEngineApp.swift
-//  FinanceEngine
-//
-//  Created by hamza Ahmed on 2026-06-25.
-//
 
 import Combine
 import SwiftUI

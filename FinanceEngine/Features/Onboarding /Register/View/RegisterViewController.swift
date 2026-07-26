@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 class RegisterViewController: UIViewController {
 
@@ -77,4 +78,24 @@ class RegisterViewController: UIViewController {
         // TODO: connect to RegisterViewModel and call register
     }
     
+}
+
+
+
+struct ViewControllerRepresentable: UIViewControllerRepresentable {
+    typealias UIViewControllerType = RegisterViewController
+
+    func makeUIViewController(context: Context) -> RegisterViewController {
+        RegisterViewController()
+    }
+    
+    func updateUIViewController(_ uiViewController: RegisterViewController, context: Context) {
+        //
+    }
+}
+
+struct ViewControllerPreview: PreviewProvider {
+    static var previews: some View{
+        ViewControllerRepresentable()
+    }
 }
