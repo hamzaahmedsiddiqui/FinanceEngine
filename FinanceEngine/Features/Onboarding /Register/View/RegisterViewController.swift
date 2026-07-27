@@ -90,7 +90,7 @@ struct ViewControllerRepresentable: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: RegisterViewController, context: Context) {
-        //
+        // nothing needed here
     }
 }
 
