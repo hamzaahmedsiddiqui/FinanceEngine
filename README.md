@@ -28,7 +28,7 @@ Key focus areas:
 | Area | Technology |
 |---|---|
 | Language | Swift 5.9 |
-| UI Framework | SwiftUI |
+| UI Framework | SwiftUI + UIKit | 
 | Architecture | Clean Architecture + MVVM-C |
 | Navigation | Coordinator pattern (`AppCoordinator`) |
 | Networking | URLSession + custom generic `APIClient` |
