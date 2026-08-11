@@ -160,7 +160,7 @@ struct DashboardView<ViewModel: DashboardViewModelProtocol>: View {
 }
 ```
 
-View is generic over the protocol — swap real or mock ViewModel without changing the view.
+The view is generic over the protocol — swap real or mock ViewModel without changing the view.
 
 ---
 
@@ -184,11 +184,3 @@ Select a simulator or connected device and press `⌘R`. No third-party dependen
 
 ---
 
-## Roadmap
-
-- [ ] Token refresh with actor-based `TokenRefreshManager`
-- [ ] Request interceptor for automatic auth header injection
-- [ ] Stocks feature (SwiftUI)
-- [ ] Payments feature (UIKit + programmatic AutoLayout)
-- [ ] Unit tests with Mock/Stub infrastructure
-- [ ] CoreData caching layer
